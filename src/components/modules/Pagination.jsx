@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import style from "./styles/Pagination.module.css";
 function Pagination({ page, setPage }) {
+  const paginationHandeling = (event) => {
+    setPage(Number(event.target.innerHTML));
+  };
   const previousHandeler = () => {
     if (page <= 1) {
       return;
@@ -23,10 +26,30 @@ function Pagination({ page, setPage }) {
       >
         Previous
       </button>
-      <p className={page === 1 ? style.selected : ""}>1</p>
-      <p className={page === 2 ? style.selected : ""}>2</p>
-      <p className={page === 3 ? style.selected : ""}>3</p>
-      <p className={page === 4 ? style.selected : ""}>4</p>
+      <p
+        className={page === 1 ? style.selected : ""}
+        onClick={paginationHandeling}
+      >
+        1
+      </p>
+      <p
+        className={page === 2 ? style.selected : ""}
+        onClick={paginationHandeling}
+      >
+        2
+      </p>
+      <p
+        className={page === 3 ? style.selected : ""}
+        onClick={paginationHandeling}
+      >
+        3
+      </p>
+      <p
+        className={page === 4 ? style.selected : ""}
+        onClick={paginationHandeling}
+      >
+        4
+      </p>
       {/* {page > 2 && page < 4 && (
         <>
           <span>...</span>

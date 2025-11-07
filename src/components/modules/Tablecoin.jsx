@@ -1,9 +1,10 @@
 import React from "react";
 import TableRow from "./TableRow";
 import { Blocks } from "react-loader-spinner";
+import style from "./styles/Tablecoin.module.css";
 function Tablecoin({ coins, isLoadeing }) {
   return (
-    <div>
+    <div className={style.container}>
       {isLoadeing ? (
         <p>
           <Blocks
@@ -17,7 +18,7 @@ function Tablecoin({ coins, isLoadeing }) {
           />
         </p>
       ) : (
-        <table>
+        <table className={style.table}>
           <thead>
             <tr>
               <th>Coin</th>

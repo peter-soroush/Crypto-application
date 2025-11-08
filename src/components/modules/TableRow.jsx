@@ -14,9 +14,11 @@ function TableRow({
     price_change_percentage_1h_in_currency,
   },
   curSymbol,
+  setChart,
 }) {
+  const showHandler = () => setChart(true);
   return (
-    <tr>
+    <tr onClick={showHandler}>
       <td>
         <div className={style.symbol}>
           <img src={image} alt={name} />

@@ -13,6 +13,7 @@ function TableRow({
     total_volume,
     price_change_percentage_1h_in_currency,
   },
+  curSymbol,
 }) {
   return (
     <tr>
@@ -23,7 +24,10 @@ function TableRow({
         </div>
       </td>
       <td>{name}</td>
-      <td>${current_price.toLocaleString()}</td>
+      <td>
+        {curSymbol}
+        {current_price.toLocaleString()}
+      </td>
       <td
         className={
           price_change_percentage_24h > 0 ? style.success : style.error
@@ -31,7 +35,10 @@ function TableRow({
       >
         {price_change_percentage_24h.toFixed(2)}%
       </td>
-      <td>{total_volume.toLocaleString()}</td>
+      <td>
+        {curSymbol}
+        {total_volume.toLocaleString()}
+      </td>
       <td>
         {price_change_percentage_1h_in_currency > 0 ? (
           <img src={chartUp} alt={name + "Direction"} />

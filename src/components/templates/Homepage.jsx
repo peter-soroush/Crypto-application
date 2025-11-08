@@ -16,10 +16,14 @@ function Homepage() {
   useEffect(() => {
     setIsLoadeing(true);
     const getData = async () => {
-      const res = await fetch(getCoinList(page, currency));
-      const json = await res.json();
-      setCoins(json);
-      setIsLoadeing(false);
+      try {
+        const res = await fetch(getCoinList(page, currency));
+        const json = await res.json();
+        setCoins(json);
+        setIsLoadeing(false);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     //other Way to fetch

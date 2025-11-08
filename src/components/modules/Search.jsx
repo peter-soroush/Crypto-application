@@ -1,15 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { searchCoin } from "../../services/CryptoApis";
+import { Blocks } from "react-loader-spinner";
 
 function Search({ currency, setcurrency, setcurSymbol }) {
+  const [text, setText] = useState("");
+  const [coins, setCoins] = useState([]);
+  const [isLoadeing, setIsLoadeing] = useState(false);
+
   const currencyHandeler = (e) => {
     const selectedOption = e.target.options[e.target.selectedIndex];
     const symbol = selectedOption.getAttribute("data-symbol");
     setcurrency(e.target.value);
     setcurSymbol(symbol);
   };
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setCoins([]);
+    if (!text) {
+      setIsLoadeing(false);
+      return;
+    }
+
+    const search = async () => {
+      try {
+        const res = await fetch(searchCoin(text), {
+          signal: controller.signal,
+        });
+        const json = await res.json();
+        if (json.coins) {
+          setIsLoadeing(false);
+          setCoins(json.coins);
+        } else {
+          alert(json.status.error_message);
+        }
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          alert(error.message);
+        }
+      }
+    };
+    setIsLoadeing(true);
+    search();
+
+    return () => controller.abort();
+  }, [text]);
+
   return (
     <div>
-      <input type="text" />
+      <input
+        type="text"
+        placeholder="Search"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
       <select value={currency} onChange={currencyHandeler}>
         <option value="usd" data-symbol="$">
           US Dollar 🇺🇸
@@ -20,7 +64,7 @@ function Search({ currency, setcurrency, setcurSymbol }) {
         <option value="ars" data-symbol="$">
           Argentine Peso 🇦🇷
         </option>
-        <option value="aud" data-symbol="$">
+        <option value="aud" data-symbol="Au$">
           Australian Dollar 🇦🇺
         </option>
         <option value="bdt" data-symbol="৳">
@@ -150,6 +194,28 @@ function Search({ currency, setcurrency, setcurSymbol }) {
           South African Rand 🇿🇦
         </option>
       </select>
+
+      <div>
+        {isLoadeing && (
+          <Blocks
+            height="50"
+            width="50"
+            color="#3874ff"
+            ariaLabel="blocks-loading"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+            visible={true}
+          />
+        )}
+        <ul>
+          {coins.map((coin) => (
+            <li key={coin.id}>
+              <img src={coin.thumb} alt={coin.name} />
+              <p>{coin.name}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

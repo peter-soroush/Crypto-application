@@ -10,7 +10,7 @@ function Tablecoin({ coins, isLoadeing, curSymbol }) {
           <Blocks
             height="80"
             width="80"
-            color="#4fa94d"
+            color="#3874ff"
             ariaLabel="blocks-loading"
             wrapperStyle={{}}
             wrapperClass="blocks-wrapper"

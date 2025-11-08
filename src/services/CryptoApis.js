@@ -9,5 +9,7 @@ const searchCoin = (query) =>
 // const getTomanPrice = () => {
 //   return `https://brsapi.ir/Api/Market/Gold_Currency.php?key=B99wLC8JEIexehDMyHzNChFVc6J3cXhQ`;
 // };
+const marketChart = (coin, currency) =>
+  `${BASE_URL}/coins/${coin}/market_chart?vs_currency=${currency}&days=7&x_cg_demo_api_key=${coingeckoApI}`;
 
-export { getCoinList, searchCoin };
+export { getCoinList, searchCoin, marketChart };

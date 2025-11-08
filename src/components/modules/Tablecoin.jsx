@@ -2,7 +2,7 @@ import React from "react";
 import TableRow from "./TableRow";
 import { Blocks } from "react-loader-spinner";
 import style from "./styles/Tablecoin.module.css";
-function Tablecoin({ coins, isLoadeing, curSymbol, setChart }) {
+function Tablecoin({ coins, isLoadeing, curSymbol, setChart, currency }) {
   return (
     <div className={style.container}>
       {isLoadeing ? (
@@ -36,6 +36,7 @@ function Tablecoin({ coins, isLoadeing, curSymbol, setChart }) {
                 key={coin.id}
                 curSymbol={curSymbol}
                 setChart={setChart}
+                currency={currency}
               />
             ))}
           </tbody>

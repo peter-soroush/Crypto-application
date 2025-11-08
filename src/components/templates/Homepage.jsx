@@ -48,6 +48,7 @@ function Homepage() {
         isLoadeing={isLoadeing}
         curSymbol={curSymbol}
         setChart={setChart}
+        currency={currency}
       />
       <Pagination page={page} setPage={setPage} />
       {!!chart && <Chart setChart={setChart} chart={chart} />}

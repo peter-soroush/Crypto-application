@@ -49,9 +49,12 @@ function Homepage() {
         curSymbol={curSymbol}
         setChart={setChart}
         currency={currency}
+        chart={chart}
       />
       <Pagination page={page} setPage={setPage} />
-      {!!chart && <Chart setChart={setChart} chart={chart} />}
+      {!!chart && (
+        <Chart setChart={setChart} chart={chart} curSymbol={curSymbol} />
+      )}
     </div>
   );
 }

@@ -12,13 +12,33 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const Chart = ({ chart, setChart, curSymbol }) => {
+const Chart = ({
+  chart,
+  setChart,
+  curSymbol,
+  dayIndicator,
+  setDayIndicator,
+}) => {
   const [type, setType] = useState("prices");
 
   const typeHandeler = (event) => {
     if (event.target.tagName === "BUTTON") {
       const type = event.target.innerText.toLowerCase().replace(" ", "_");
       setType(type);
+    }
+  };
+
+  const dayIndicatorHandeler = (event) => {
+    if (event.target.tagName === "BUTTON") {
+      let day = event.target.innerText.toLowerCase().replace(" ", "_");
+      if (day === "1_day") {
+        day = "1";
+      } else if (day === "7_days") {
+        day = "7";
+      } else if (day === "30_days") {
+        day = "30";
+      }
+      setDayIndicator(day);
     }
   };
 
@@ -31,6 +51,18 @@ const Chart = ({ chart, setChart, curSymbol }) => {
         <div className={style.name}>
           <img src={chart.coin.image} alt={chart.coin.name} />
           <p>{chart.coin.name}</p>
+
+          <div className={style.timeIndicator} onClick={dayIndicatorHandeler}>
+            <button className={dayIndicator === "1" ? style.selected : null}>
+              1 day
+            </button>
+            <button className={dayIndicator === "7" ? style.selected : null}>
+              7 days
+            </button>
+            <button className={dayIndicator === "30" ? style.selected : null}>
+              30 days
+            </button>
+          </div>
         </div>
         <div className={style.graph}>
           <ChartComponent data={convertData(chart, type)} type={type} />
@@ -48,7 +80,7 @@ const Chart = ({ chart, setChart, curSymbol }) => {
         </div>
         <div className={style.details}>
           <div>
-            <p>Prices: </p>
+            <p>Price: </p>
             <span>
               {curSymbol}
               {chart.coin.current_price.toLocaleString()}
@@ -93,7 +125,7 @@ const ChartComponent = ({ data, type }) => {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" hide />
-        <YAxis dataKey={type} domain={["auto", "auto"]} width="500" />
+        <YAxis dataKey={type} width="auto" domain={["auto", "auto"]} />
         <Tooltip />
         <Legend />
         <Line

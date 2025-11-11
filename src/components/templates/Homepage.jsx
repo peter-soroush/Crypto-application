@@ -8,7 +8,7 @@ import Chart from "../modules/Chart";
 function Homepage() {
   const [coins, setCoins] = useState([]);
   const [isLoadeing, setIsLoadeing] = useState(true);
-
+  const [dayIndicator, setDayIndicator] = useState("1");
   const [page, setPage] = useState(1);
   const [currency, setcurrency] = useState("usd");
   const [curSymbol, setcurSymbol] = useState("$");
@@ -50,10 +50,17 @@ function Homepage() {
         setChart={setChart}
         currency={currency}
         chart={chart}
+        dayIndicator={dayIndicator}
       />
       <Pagination page={page} setPage={setPage} />
       {!!chart && (
-        <Chart setChart={setChart} chart={chart} curSymbol={curSymbol} />
+        <Chart
+          setChart={setChart}
+          chart={chart}
+          curSymbol={curSymbol}
+          setDayIndicator={setDayIndicator}
+          dayIndicator={dayIndicator}
+        />
       )}
     </div>
   );

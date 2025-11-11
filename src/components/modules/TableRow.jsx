@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { marketChart } from "../../services/CryptoApis";
 import chartUp from "../../assets/chart-up.svg";
 import chartDown from "../../assets/chart-down.svg";
 
 import style from "../modules/styles/TableRow.module.css";
-function TableRow({ coin, curSymbol, setChart, currency }) {
+function TableRow({ coin, curSymbol, setChart, currency, dayIndicator }) {
   const {
     id,
     image,
@@ -18,7 +18,7 @@ function TableRow({ coin, curSymbol, setChart, currency }) {
 
   const showHandler = async () => {
     try {
-      const res = await fetch(marketChart(id, currency));
+      const res = await fetch(marketChart(id, currency, dayIndicator));
       const json = await res.json();
       setChart({ ...json, coin });
     } catch (error) {

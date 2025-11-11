@@ -34,12 +34,13 @@
 
 .graph {
   width: 860px;
-  height: 400px;
+  height: 300px;
 }
 
 .name {
   display: flex;
   align-items: center;
+
   margin: 0 10px 30px;
 }
 
@@ -61,7 +62,7 @@
 .types button {
   margin: 10px 20px;
   background-color: #18181cdb;
-  border: 10x solid #3874ff;
+  border: 1px solid #3874ff;
   color: #3874ff;
   font-size: 1rem;
   padding: 5px 10px;
@@ -89,4 +90,26 @@
   margin-right: 7px;
   color: #3874ff;
   font-weight: 700;
+}
+
+.timeIndicator {
+  display: flex;
+  margin-left: 300px;
+  gap: 0px;
+}
+
+.timeIndicator button {
+  margin: 10px 20px;
+  background-color: #18181cdb;
+  border: 1px solid #3874ff;
+  color: #3874ff;
+  font-size: 1rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.timeIndicator .selected {
+  background-color: #3874ff;
+  color: #fff;
 }

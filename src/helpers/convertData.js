@@ -12,8 +12,9 @@ const convertData = (data, type) => {
     const formattedDate = `${weekday} : ${hours}:${minutes}`;
 
     // Format numeric value using toLocaleString
+    const formattedtype = item[1].toFixed(0).toLocaleString();
 
-    return { date: formattedDate, [type]: item[1] };
+    return { date: formattedDate, [type]: formattedtype };
   });
 
   return convertedData;

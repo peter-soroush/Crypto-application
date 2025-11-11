@@ -9,6 +9,7 @@ function Tablecoin({
   setChart,
   currency,
   chart,
+  dayIndicator,
 }) {
   return (
     <div className={style.container}>
@@ -26,7 +27,6 @@ function Tablecoin({
         </p>
       ) : (
         <table className={style.table}>
-          {console.log(!!chart)}
           <thead>
             <tr>
               <th>Coin</th>
@@ -45,6 +45,7 @@ function Tablecoin({
                 curSymbol={curSymbol}
                 setChart={setChart}
                 currency={currency}
+                dayIndicator={dayIndicator}
               />
             ))}
           </tbody>
